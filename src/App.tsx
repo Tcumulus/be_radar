@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import Header from "./components/Header"
 import Slider from "./components/Slider"
 import useStorage from "./hooks/firebase/useStorage"
@@ -11,23 +11,32 @@ const App: React.FC = () => {
   const lightImages = useStorage("light")
   const darkImages = useStorage("dark")
 
+  const utcOffset = 2
+
   // calculate timesteps for imagery
-  const timesteps = [""]
-  let now = new Date(Date.now() - 15 * 60000)
-  now = new Date(Math.floor(now.getTime() / (5 * 60000)) * (5 * 60000))
-  for (let i=0; i<lightImages.length; i++) {
-    const _timestep = new Date(now.getTime() - (i * (5 * 60000)))
-    timesteps.push(_timestep.toLocaleTimeString().slice(0, -3))
+  const timesteps: string[] = []
+  if (lightImages.length > 0) {
+    const dateString = lightImages[lightImages.length-1].substring(85, 101)
+    let date = new Date(dateString.substring(0, 4), dateString.substring(5, 7), dateString.substring(8, 10), dateString.substring(11, 13), dateString.substring(14, 16), 0)
+    date = new Date(date.getTime() + utcOffset * 60 * 60000)
+    for (let i=0; i<lightImages.length; i++) {
+      const _timestep = new Date(date.getTime() - (i * (5 * 60000)))
+      timesteps.push(_timestep.toLocaleTimeString().slice(0, -3))
+    }
   }
 
   const toggleMode = () => {
     theme == "dark" ? setTheme("") : setTheme("dark")
   }
 
+  const saveGif = () => {
+    console.log("gif not operating yet")
+  }
+
   return (
     <div className={theme}>
       <div className="flex flex-col h-screen bg-white dark:bg-black">
-        <Header setTimeframe={setTimeframe} toggleMode={toggleMode}/>
+        <Header setTimeframe={setTimeframe} toggleMode={toggleMode} saveGif={saveGif}/>
         <div className="flex flex-row h-5/6">
           <Slider timestep={timestep} setTimestep={setTimestep} timesteps={timesteps}/>
           <div>

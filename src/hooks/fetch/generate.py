@@ -20,8 +20,13 @@ def generateMap(date, hours, minutes, utc, mode):
     minutes = f"0{minutes}"
   if (utc == 2):
     hours = hours-1
-  utcTime = f"{hours-1}:{minutes}"
 
+  # time for plot title and path
+  utcHours = hours-1
+  if (utcHours < 10):
+    utcHours = f"0{utcHours}" 
+  utcTimeString = f"{utcHours}-{minutes}"
+  
   if (hours < 10):
     hours = f"0{hours}" 
   urlDate = f"{date}T{hours}:{minutes}:00.000+01:00"
@@ -64,7 +69,7 @@ def generateMap(date, hours, minutes, utc, mode):
 
     # title and limits
     fig.patch.set_facecolor(bg_color)
-    plt.title(f"{date} {utcTime}UTC", color=color, loc="left")
+    plt.title(f"{date} {utcTimeString}UTC", color=color, loc="left")
     plt.ylim(500000, 775000)
     plt.xlim(500000, 810000)
 
@@ -77,7 +82,7 @@ def generateMap(date, hours, minutes, utc, mode):
   plt.tight_layout()
 
   # save plot
-  name = f"{mode}/plot-2022-09-14T{utcTime[:2]}h{utcTime[3:5]}.png"
+  name = f"{mode}/plot-2022-09-14T{utcTimeString}.png"
   path = f"src/hooks/fetch/out/{name}"
   plt.savefig(path, dpi=200, facecolor=bg_color)
   plt.close()

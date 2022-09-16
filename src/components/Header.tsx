@@ -2,10 +2,11 @@ import React from "react"
 
 interface Props {
   setTimeframe: (param: number) => void,
-  toggleMode: () => void
+  toggleMode: () => void,
+  saveGif: () => void
 }
 
-const Header: React.FC<Props> = ({ setTimeframe, toggleMode }) => {
+const Header: React.FC<Props> = ({ setTimeframe, toggleMode, saveGif }) => {
   return (
     <div className="flex flex-row justify-between mb-4 items-center">
       <h1 className="m-4 ml-8 text-3xl text-gray-600 dark:text-gray-300 font-medium">Radar Belgium</h1>
@@ -19,7 +20,6 @@ const Header: React.FC<Props> = ({ setTimeframe, toggleMode }) => {
           <input type="checkbox" onClick={toggleMode} className="w-4 h-4 outline-none"/>
           <p className="h-fit ml-2 text-gray-600 dark:text-gray-300">Dark Mode</p>
         </div>
-        <button className="h-fit ml-8 m-4 p-2 text-gray-600 dark:text-gray-300 bg-white dark:bg-black shadow-sm border rounded-md">Save Image</button>
         <button className="h-fit ml-2 m-4 p-2 text-gray-600 dark:text-gray-300 bg-white dark:bg-black shadow-sm border rounded-md">Save GIF</button>
       </div>
     </div>

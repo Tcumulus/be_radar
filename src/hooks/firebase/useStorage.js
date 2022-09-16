@@ -12,8 +12,8 @@ const useStorage = (mode) => {
     }
     
     const loadImages = async () => {
-        const urls = await fetchImages()
-        setFiles(urls)
+      const urls = await fetchImages()
+      setFiles(urls)
     }
     loadImages()
   }, [])
