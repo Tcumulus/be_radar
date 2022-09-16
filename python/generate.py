@@ -33,14 +33,14 @@ def generateMap(date, hours, minutes, utc, mode):
 
   # fetching file from waterinfo
   response = requests.get(f"https://hydro.vmm.be/grid/kiwis/KiWIS?datasource=10&service=kisters&type=queryServices&request=getrasterfile&ts_path=COMP_VMM/Vlaanderen_VMM/Ni/5m.Cmd.Raster.O.SRI_1km_cappi&date={urlDate}&format=geotiff")
-  open("src/hooks/fetch/temp/file.tif", "wb").write(response.content)
+  open("temp/file.tif", "wb").write(response.content)
 
   fig, ax = plt.subplots()
 
   try:
     # opening raster and shapefile
-    raster = rasterio.open("src/hooks/fetch/temp/file.tif", "r+")
-    shapefile = gpd.read_file("src/hooks/fetch/shapefile/provinces_L08.shp")
+    raster = rasterio.open("temp/file.tif", "r+")
+    shapefile = gpd.read_file("shapefile/provinces_L08.shp")
 
     # transforming and cleaning raster
     array = raster.read(1)
@@ -83,7 +83,7 @@ def generateMap(date, hours, minutes, utc, mode):
 
   # save plot
   name = f"{mode}/plot-2022-09-14T{utcTimeString}.png"
-  path = f"src/hooks/fetch/out/{name}"
+  path = f"out/{name}"
   plt.savefig(path, dpi=200, facecolor=bg_color)
   plt.close()
 

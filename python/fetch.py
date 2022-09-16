@@ -34,6 +34,7 @@ def fetchImagery():
     blob = bucket.blob(name)
     blob.upload_from_filename(path)
     os.remove(path)
+    print(f"Finished Uploading: {name}")
 
   def delete(x, mode):
     # iterate over all files in storage
@@ -46,7 +47,7 @@ def fetchImagery():
     except:
       print("error while deleting files")
 
-  with open("src/hooks/fetch/lastDate.txt", "r") as file:
+  with open("lastDate.txt", "r") as file:
     lastDate = file.read()
     lastDate = datetime.strptime(lastDate, "%Y-%m-%d %H:%M:%S")
 
@@ -57,6 +58,8 @@ def fetchImagery():
 
   delete(x, "light")
   delete(x, "dark")
+
+  print("Finished Deleting")
   
   for i in range(x):
     date = now - timedelta(minutes=i*5) # interval of 5 minutes
@@ -65,7 +68,7 @@ def fetchImagery():
     [name, path] = generateMap(date.strftime("%Y-%m-%d"), date.hour, date.minute, utcOffset, "dark")
     upload(name, path)
 
-  with open("src/hooks/fetch/lastDate.txt", "w") as file:
+  with open("lastDate.txt", "w") as file:
     file.write(now.strftime("%Y-%m-%d %H:%M:%S"))
 
 fetchImagery()
