@@ -63,10 +63,9 @@ def fetchImagery():
   
   for i in range(x):
     date = now - timedelta(minutes=i*5) # interval of 5 minutes
-    [name, path] = generateMap(date.strftime("%Y-%m-%d"), date.hour, date.minute, utcOffset, "light")
-    upload(name, path)
-    [name, path] = generateMap(date.strftime("%Y-%m-%d"), date.hour, date.minute, utcOffset, "dark")
-    upload(name, path)
+    files = generateMap(date.strftime("%Y-%m-%d"), date.hour, date.minute, utcOffset)
+    upload(files[0][0], files[0][1])
+    upload(files[1][0], files[1][1])
 
   with open("lastDate.txt", "w") as file:
     file.write(now.strftime("%Y-%m-%d %H:%M:%S"))

@@ -6,15 +6,7 @@ from matplotlib import colors
 import numpy as np
 import requests
 
-def generateMap(date, hours, minutes, utc, mode):
-  # color theme
-  if(mode == "dark"):
-    color = "white"
-    bg_color = "black"
-  else:
-    color = "black"
-    bg_color = "white"
-  
+def generateMap(date, hours, minutes, utc):
   # formating time and date
   if (minutes < 10):
     minutes = f"0{minutes}"
@@ -35,6 +27,17 @@ def generateMap(date, hours, minutes, utc, mode):
   response = requests.get(f"https://hydro.vmm.be/grid/kiwis/KiWIS?datasource=10&service=kisters&type=queryServices&request=getrasterfile&ts_path=COMP_VMM/Vlaanderen_VMM/Ni/5m.Cmd.Raster.O.SRI_1km_cappi&date={urlDate}&format=geotiff")
   open("temp/file.tif", "wb").write(response.content)
 
+  files = []
+  [name, path] = plotMap("light", "white", "black", date, utcTimeString)
+  files.append([name, path])
+
+  [name, path] = plotMap("dark", "black", "white", date, utcTimeString)
+  files.append([name, path])
+
+  return files
+
+
+def plotMap(mode, color, bg_color, date, utcTimeString):
   fig, ax = plt.subplots()
 
   try:
