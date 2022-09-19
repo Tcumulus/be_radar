@@ -8,8 +8,8 @@ interface Props {
 
 const Slider: React.FC<Props> = ({ timestep, setTimestep, timesteps }) => {
   return (
-    <div className="flex flex-col items-center w-1/5 mr-16">
-      <p className="font-bold mb-6 text-2xl h-fit m-4 p-4 px-8 text-gray-600 dark:text-gray-300 bg-white dark:bg-black shadow-sm border rounded-xl">
+    <div className="flex flex-col items-center w-1/5 m-4 md:mr-16">
+      <p className="h-fit font-bold m-4 text-xl md:text-2xl p-2 md:p-4 md:px-8 text-gray-600 dark:text-gray-300 bg-white dark:bg-black shadow-sm border rounded-xl">
         {timesteps[timestep]}
       </p>
       <div className="flex flex-col items-center w-full ">

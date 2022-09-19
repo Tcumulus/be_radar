@@ -8,8 +8,8 @@ interface Props {
 
 const Header: React.FC<Props> = ({ setTimeframe, toggleMode, saveGif }) => {
   return (
-    <div className="flex flex-row justify-between mb-4 items-center">
-      <h1 className="m-4 ml-8 text-3xl text-gray-600 dark:text-gray-300 font-medium">Radar Belgium</h1>
+    <div className="flex flex-row justify-start md:justify-between mb-4 items-center">
+      <h1 className="m-4 md:ml-8 text-3xl text-gray-600 dark:text-gray-300 font-medium">Radar Belgium</h1>
       <div className="flex flex-row flex-grow justify-end">
         <select defaultValue="1h" className="h-fit m-4 p-2 text-gray-600 dark:text-gray-100 bg-white dark:bg-black shadow-sm border rounded-md outline-none">
             {/*<option value="30m" onClick={() => setTimeframe(0.5)}>30mins</option>*/}

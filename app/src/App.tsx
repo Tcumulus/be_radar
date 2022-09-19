@@ -41,8 +41,8 @@ const App: React.FC = () => {
           <Slider timestep={timestep} setTimestep={setTimestep} timesteps={timesteps}/>
           <div>
             { theme == "dark" ?
-              <img src={darkImages[darkImages.length-timestep-1]} className="mb-2 h-full"/>
-              : <img src={lightImages[lightImages.length-timestep-1]} className="mb-2 h-full"/>
+              <img src={darkImages[darkImages.length-timestep-1]} className="mt-8 mb-2 mr-2 w-full md:h-full"/>
+              : <img src={lightImages[lightImages.length-timestep-1]} className="mt-8 mb-2 mr-2 w-full md:h-full"/>
             }
           </div>
         </div>  
