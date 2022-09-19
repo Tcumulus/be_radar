@@ -28,10 +28,10 @@ def generateMap(date, hours, minutes, utc):
   open("temp/file.tif", "wb").write(response.content)
 
   files = []
-  [name, path] = plotMap("light", "white", "black", date, utcTimeString)
+  [name, path] = plotMap("light", "black", "white", date, utcTimeString)
   files.append([name, path])
 
-  [name, path] = plotMap("dark", "black", "white", date, utcTimeString)
+  [name, path] = plotMap("dark", "white", "black", date, utcTimeString)
   files.append([name, path])
 
   return files
